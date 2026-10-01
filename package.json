@@ -2,6 +2,7 @@
   "name": "simple-invoice",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "yarn@4.10.3",
   "workspaces": [
     "backend",
     "frontend"
@@ -25,6 +26,6 @@
     "docker:down": "docker compose down",
     "docker:postgres": "docker compose up -d postgres",
     "db:migrate": "npm run prisma:migrate --prefix backend",
-    "db:deploy": "npx --prefix backend prisma migrate deploy"
+    "db:deploy": "yarn --cwd backend prisma migrate deploy"
   }
 }
