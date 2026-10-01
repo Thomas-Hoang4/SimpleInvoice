@@ -18,6 +18,8 @@ node_modules/
 dist/
 build/
 .output/
+.vite/
+**/.vite/
 
 # Logs
 logs/
@@ -43,3 +45,7 @@ Thumbs.db
 
 # TypeScript
 *.tsbuildinfo
+
+# Planning & task tracking
+TASK_COMMITS_PLAN.md
+plan.md

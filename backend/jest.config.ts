@@ -37,6 +37,7 @@ const config: Config = {
     'apps/**/*.(t|j)s',
   ],
   coverageDirectory: './coverage',
+  coverageReporters: ['text', 'lcov', 'json-summary'],
   testEnvironment: 'node',
 };
 

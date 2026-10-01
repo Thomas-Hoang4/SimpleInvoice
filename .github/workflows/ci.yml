@@ -1,0 +1,63 @@
+name: CI & Code Coverage
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test-and-coverage:
+    name: Test & Code Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: 'yarn'
+
+      - name: Enable Corepack & Yarn Berry
+        run: |
+          corepack enable
+          corepack prepare yarn@4.10.3 --activate
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build applications
+        run: yarn build
+
+      - name: Run Backend Tests with Coverage
+        run: yarn test:cov:backend
+
+      - name: Run Backend E2E Tests
+        run: yarn test:e2e
+
+      - name: Run Frontend Tests with Coverage
+        run: yarn test:cov:frontend
+
+      - name: Publish Code Coverage Summary
+        if: always()
+        run: node scripts/summarize-coverage.mjs
+
+      - name: Upload Backend Coverage Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-coverage
+          path: backend/coverage
+          if-no-files-found: ignore
+
+      - name: Upload Frontend Coverage Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: frontend/coverage
+          if-no-files-found: ignore
