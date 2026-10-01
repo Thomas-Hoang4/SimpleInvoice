@@ -33,6 +33,8 @@ const config: Config = {
   },
   collectCoverageFrom: [
     'src/**/*.(t|j)s',
+    '!src/main.ts',
+    '!src/database/seed.ts',
     'libs/**/*.(t|j)s',
     'apps/**/*.(t|j)s',
   ],

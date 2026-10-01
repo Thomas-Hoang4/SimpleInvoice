@@ -13,13 +13,13 @@ interface SeedInvoiceInput {
   invoiceNumber: string;
   invoiceReference?: string;
   invoiceDate: string; // YYYY-MM-DD
-  dueDate: string;     // YYYY-MM-DD
+  dueDate: string; // YYYY-MM-DD
   currency?: string;
   currencySymbol?: string;
   description?: string;
   status: InvoiceStatus; // Draft | Pending | Paid (Overdue is derived)
   discount?: number;
-  taxRate?: number;    // e.g. 0.10 for 10%
+  taxRate?: number; // e.g. 0.10 for 10%
   paidAmount?: number;
   customerIndex: number;
   items: SeedItem[];
@@ -152,10 +152,10 @@ async function main() {
       currencySymbol: 'AU$',
       description: 'Invoice is issued to Kanglee',
       status: InvoiceStatus.Pending, // Will derive Overdue (dueDate 2026-07-03 < today, balance 728.66)
-      invoiceSubTotal: 2000.00,
-      totalDiscount: 20.00,
-      totalTax: 200.00,
-      totalAmount: 2180.00,
+      invoiceSubTotal: 2000.0,
+      totalDiscount: 20.0,
+      totalTax: 200.0,
+      totalAmount: 2180.0,
       totalPaid: 1451.34,
       balanceAmount: 728.66,
       createdAt: new Date('2026-06-03T12:03:26.995Z'),
@@ -167,7 +167,7 @@ async function main() {
             id: 'b1c2d3e4-0000-0000-0000-000000000001',
             name: 'Honda RC150',
             quantity: 2,
-            rate: 1000.00,
+            rate: 1000.0,
           },
         ],
       },
@@ -185,13 +185,17 @@ async function main() {
       dueDate: '2026-10-28',
       description: 'Q4 Cloud Infrastructure Architecture Consulting',
       status: InvoiceStatus.Draft,
-      discount: 50.00,
-      taxRate: 0.10,
+      discount: 50.0,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 1, // Sarah
       items: [
-        { name: 'Cloud Solution Architecture (Hours)', quantity: 20, rate: 180.00 },
-        { name: 'Kubernetes Cluster Provisioning', quantity: 1, rate: 1500.00 },
+        {
+          name: 'Cloud Solution Architecture (Hours)',
+          quantity: 20,
+          rate: 180.0,
+        },
+        { name: 'Kubernetes Cluster Provisioning', quantity: 1, rate: 1500.0 },
       ],
     },
     {
@@ -202,12 +206,12 @@ async function main() {
       description: 'Brand Identity Design & Marketing Collateral',
       status: InvoiceStatus.Draft,
       discount: 0,
-      taxRate: 0.10,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 7, // Chloe
       items: [
-        { name: 'Vector Logo Package', quantity: 1, rate: 2200.00 },
-        { name: 'Brand Typography Guidelines', quantity: 1, rate: 800.00 },
+        { name: 'Vector Logo Package', quantity: 1, rate: 2200.0 },
+        { name: 'Brand Typography Guidelines', quantity: 1, rate: 800.0 },
       ],
     },
     {
@@ -217,12 +221,12 @@ async function main() {
       dueDate: '2026-10-25',
       description: 'Annual Software Maintenance Contract Draft',
       status: InvoiceStatus.Draft,
-      discount: 200.00,
-      taxRate: 0.10,
+      discount: 200.0,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 3, // Elena
       items: [
-        { name: 'SaaS Platform Support SLA Tier 1', quantity: 12, rate: 350.00 },
+        { name: 'SaaS Platform Support SLA Tier 1', quantity: 12, rate: 350.0 },
       ],
     },
     {
@@ -233,12 +237,12 @@ async function main() {
       description: 'Mobile Application Wireframing & UX Research',
       status: InvoiceStatus.Draft,
       discount: 0,
-      taxRate: 0.10,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 4, // Marcus
       items: [
-        { name: 'User Persona Research', quantity: 2, rate: 750.00 },
-        { name: 'Interactive Figma Prototype', quantity: 1, rate: 2500.00 },
+        { name: 'User Persona Research', quantity: 2, rate: 750.0 },
+        { name: 'Interactive Figma Prototype', quantity: 1, rate: 2500.0 },
       ],
     },
     {
@@ -248,13 +252,13 @@ async function main() {
       dueDate: '2026-11-01',
       description: 'Security & Penetration Testing Assessment',
       status: InvoiceStatus.Draft,
-      discount: 100.00,
-      taxRate: 0.10,
+      discount: 100.0,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 5, // Amara
       items: [
-        { name: 'Web Application Penetration Test', quantity: 1, rate: 3800.00 },
-        { name: 'API Security Vulnerability Audit', quantity: 1, rate: 1600.00 },
+        { name: 'Web Application Penetration Test', quantity: 1, rate: 3800.0 },
+        { name: 'API Security Vulnerability Audit', quantity: 1, rate: 1600.0 },
       ],
     },
 
@@ -267,11 +271,15 @@ async function main() {
       description: 'Enterprise PostgreSQL Database Optimization',
       status: InvoiceStatus.Paid,
       discount: 0,
-      taxRate: 0.10,
+      taxRate: 0.1,
       customerIndex: 2, // David
       items: [
-        { name: 'Database Query Indexing & Tuning', quantity: 15, rate: 200.00 },
-        { name: 'Connection Pooler Setup (PgBouncer)', quantity: 1, rate: 850.00 },
+        { name: 'Database Query Indexing & Tuning', quantity: 15, rate: 200.0 },
+        {
+          name: 'Connection Pooler Setup (PgBouncer)',
+          quantity: 1,
+          rate: 850.0,
+        },
       ],
     },
     {
@@ -281,12 +289,12 @@ async function main() {
       dueDate: '2026-07-15',
       description: 'Frontend Modernization with Vite & React 18',
       status: InvoiceStatus.Paid,
-      discount: 150.00,
-      taxRate: 0.10,
+      discount: 150.0,
+      taxRate: 0.1,
       customerIndex: 6, // Hiroshi
       items: [
-        { name: 'Webpack to Vite Migration', quantity: 1, rate: 3200.00 },
-        { name: 'TanStack Query State Management', quantity: 1, rate: 1400.00 },
+        { name: 'Webpack to Vite Migration', quantity: 1, rate: 3200.0 },
+        { name: 'TanStack Query State Management', quantity: 1, rate: 1400.0 },
       ],
     },
     {
@@ -296,12 +304,16 @@ async function main() {
       dueDate: '2026-08-01',
       description: 'CI/CD Pipeline Automation & Automated Testing',
       status: InvoiceStatus.Paid,
-      discount: 50.00,
-      taxRate: 0.10,
+      discount: 50.0,
+      taxRate: 0.1,
       customerIndex: 8, // Oliver
       items: [
-        { name: 'GitHub Actions Matrix Workflow', quantity: 1, rate: 1900.00 },
-        { name: 'Vitest & Jest Unit Test Integration', quantity: 1, rate: 1100.00 },
+        { name: 'GitHub Actions Matrix Workflow', quantity: 1, rate: 1900.0 },
+        {
+          name: 'Vitest & Jest Unit Test Integration',
+          quantity: 1,
+          rate: 1100.0,
+        },
       ],
     },
     {
@@ -312,11 +324,15 @@ async function main() {
       description: 'SEO Optimization & Core Web Vitals Audit',
       status: InvoiceStatus.Paid,
       discount: 0,
-      taxRate: 0.10,
+      taxRate: 0.1,
       customerIndex: 9, // Priya
       items: [
-        { name: 'Largest Contentful Paint (LCP) Fixes', quantity: 1, rate: 1250.00 },
-        { name: 'Technical SEO & Structured Data', quantity: 1, rate: 950.00 },
+        {
+          name: 'Largest Contentful Paint (LCP) Fixes',
+          quantity: 1,
+          rate: 1250.0,
+        },
+        { name: 'Technical SEO & Structured Data', quantity: 1, rate: 950.0 },
       ],
     },
     {
@@ -326,12 +342,12 @@ async function main() {
       dueDate: '2026-09-05',
       description: 'Microservices Architecture Review',
       status: InvoiceStatus.Paid,
-      discount: 300.00,
-      taxRate: 0.10,
+      discount: 300.0,
+      taxRate: 0.1,
       customerIndex: 10, // Lucas
       items: [
-        { name: 'NestJS Microservices Blueprint', quantity: 1, rate: 4500.00 },
-        { name: 'Kafka Event Stream Architecture', quantity: 1, rate: 2500.00 },
+        { name: 'NestJS Microservices Blueprint', quantity: 1, rate: 4500.0 },
+        { name: 'Kafka Event Stream Architecture', quantity: 1, rate: 2500.0 },
       ],
     },
     {
@@ -341,12 +357,16 @@ async function main() {
       dueDate: '2026-09-15',
       description: 'Hardware Equipment & High-Performance Workstation',
       status: InvoiceStatus.Paid,
-      discount: 100.00,
-      taxRate: 0.10,
+      discount: 100.0,
+      taxRate: 0.1,
       customerIndex: 1, // Sarah
       items: [
-        { name: 'Apple M4 Max Developer Workstation', quantity: 1, rate: 5200.00 },
-        { name: '4K Ultra-Wide Studio Display', quantity: 1, rate: 1800.00 },
+        {
+          name: 'Apple M4 Max Developer Workstation',
+          quantity: 1,
+          rate: 5200.0,
+        },
+        { name: '4K Ultra-Wide Studio Display', quantity: 1, rate: 1800.0 },
       ],
     },
     {
@@ -357,11 +377,15 @@ async function main() {
       description: 'Mobile App Store Deployment & Certification',
       status: InvoiceStatus.Paid,
       discount: 0,
-      taxRate: 0.10,
+      taxRate: 0.1,
       customerIndex: 2, // David
       items: [
-        { name: 'iOS App Store Production Release', quantity: 1, rate: 1500.00 },
-        { name: 'Google Play Store Release & Verification', quantity: 1, rate: 1200.00 },
+        { name: 'iOS App Store Production Release', quantity: 1, rate: 1500.0 },
+        {
+          name: 'Google Play Store Release & Verification',
+          quantity: 1,
+          rate: 1200.0,
+        },
       ],
     },
 
@@ -374,12 +398,16 @@ async function main() {
       description: 'Monthly Cloud Managed Hosting & Monitoring',
       status: InvoiceStatus.Pending,
       discount: 0,
-      taxRate: 0.10,
-      paidAmount: 500.00, // Partial payment
+      taxRate: 0.1,
+      paidAmount: 500.0, // Partial payment
       customerIndex: 3, // Elena
       items: [
-        { name: 'AWS Dedicated Instance Managed Cluster', quantity: 1, rate: 1600.00 },
-        { name: 'Datadog APM & Alerting Suite', quantity: 1, rate: 400.00 },
+        {
+          name: 'AWS Dedicated Instance Managed Cluster',
+          quantity: 1,
+          rate: 1600.0,
+        },
+        { name: 'Datadog APM & Alerting Suite', quantity: 1, rate: 400.0 },
       ],
     },
     {
@@ -389,13 +417,13 @@ async function main() {
       dueDate: '2026-10-28',
       description: 'Full-Stack Invoice Management Solution Phase 1',
       status: InvoiceStatus.Pending,
-      discount: 100.00,
-      taxRate: 0.10,
-      paidAmount: 2000.00, // Partial payment
+      discount: 100.0,
+      taxRate: 0.1,
+      paidAmount: 2000.0, // Partial payment
       customerIndex: 4, // Marcus
       items: [
-        { name: 'Backend NestJS API Framework', quantity: 1, rate: 3500.00 },
-        { name: 'Frontend React UI Dashboard', quantity: 1, rate: 3000.00 },
+        { name: 'Backend NestJS API Framework', quantity: 1, rate: 3500.0 },
+        { name: 'Frontend React UI Dashboard', quantity: 1, rate: 3000.0 },
       ],
     },
     {
@@ -406,12 +434,16 @@ async function main() {
       description: 'Data Analytics & PowerBI Reporting Integration',
       status: InvoiceStatus.Pending,
       discount: 0,
-      taxRate: 0.10,
+      taxRate: 0.1,
       paidAmount: 0, // Unpaid active
       customerIndex: 5, // Amara
       items: [
-        { name: 'ETL Pipeline Data Modeling', quantity: 1, rate: 2800.00 },
-        { name: 'Executive Dashboard Visualization', quantity: 1, rate: 1700.00 },
+        { name: 'ETL Pipeline Data Modeling', quantity: 1, rate: 2800.0 },
+        {
+          name: 'Executive Dashboard Visualization',
+          quantity: 1,
+          rate: 1700.0,
+        },
       ],
     },
     {
@@ -421,13 +453,21 @@ async function main() {
       dueDate: '2026-10-25',
       description: 'E-Commerce Payment Gateway Integration',
       status: InvoiceStatus.Pending,
-      discount: 50.00,
-      taxRate: 0.10,
-      paidAmount: 1000.00,
+      discount: 50.0,
+      taxRate: 0.1,
+      paidAmount: 1000.0,
       customerIndex: 6, // Hiroshi
       items: [
-        { name: 'Stripe Webhooks & Checkout Integration', quantity: 1, rate: 2400.00 },
-        { name: 'Apple Pay & Google Pay Mobile Checkout', quantity: 1, rate: 1200.00 },
+        {
+          name: 'Stripe Webhooks & Checkout Integration',
+          quantity: 1,
+          rate: 2400.0,
+        },
+        {
+          name: 'Apple Pay & Google Pay Mobile Checkout',
+          quantity: 1,
+          rate: 1200.0,
+        },
       ],
     },
     {
@@ -438,12 +478,20 @@ async function main() {
       description: 'Technical Writing & API Documentation',
       status: InvoiceStatus.Pending,
       discount: 0,
-      taxRate: 0.10,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 7, // Chloe
       items: [
-        { name: 'OpenAPI Swagger 3.0 Documentation', quantity: 1, rate: 1400.00 },
-        { name: 'Developer Quick-Start Portal Guides', quantity: 1, rate: 1100.00 },
+        {
+          name: 'OpenAPI Swagger 3.0 Documentation',
+          quantity: 1,
+          rate: 1400.0,
+        },
+        {
+          name: 'Developer Quick-Start Portal Guides',
+          quantity: 1,
+          rate: 1100.0,
+        },
       ],
     },
     {
@@ -453,13 +501,17 @@ async function main() {
       dueDate: '2026-11-01',
       description: 'Docker Containerization & Multi-Environment Setup',
       status: InvoiceStatus.Pending,
-      discount: 80.00,
-      taxRate: 0.10,
+      discount: 80.0,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 8, // Oliver
       items: [
-        { name: 'Docker Compose Orchestration', quantity: 1, rate: 1600.00 },
-        { name: 'Nginx Reverse Proxy & SSL Configuration', quantity: 1, rate: 900.00 },
+        { name: 'Docker Compose Orchestration', quantity: 1, rate: 1600.0 },
+        {
+          name: 'Nginx Reverse Proxy & SSL Configuration',
+          quantity: 1,
+          rate: 900.0,
+        },
       ],
     },
     {
@@ -470,11 +522,15 @@ async function main() {
       description: 'Performance Tuning & Memory Leak Auditing',
       status: InvoiceStatus.Pending,
       discount: 0,
-      taxRate: 0.10,
-      paidAmount: 800.00,
+      taxRate: 0.1,
+      paidAmount: 800.0,
       customerIndex: 9, // Priya
       items: [
-        { name: 'Heap Snapshot Analysis & V8 Diagnostics', quantity: 8, rate: 220.00 },
+        {
+          name: 'Heap Snapshot Analysis & V8 Diagnostics',
+          quantity: 8,
+          rate: 220.0,
+        },
       ],
     },
     {
@@ -484,13 +540,21 @@ async function main() {
       dueDate: '2026-11-02',
       description: 'Automated E2E Testing Suite Implementation',
       status: InvoiceStatus.Pending,
-      discount: 100.00,
-      taxRate: 0.10,
+      discount: 100.0,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 10, // Lucas
       items: [
-        { name: 'Playwright Test Automation Architecture', quantity: 1, rate: 3100.00 },
-        { name: 'Cross-Browser Visual Regression Testing', quantity: 1, rate: 1400.00 },
+        {
+          name: 'Playwright Test Automation Architecture',
+          quantity: 1,
+          rate: 3100.0,
+        },
+        {
+          name: 'Cross-Browser Visual Regression Testing',
+          quantity: 1,
+          rate: 1400.0,
+        },
       ],
     },
 
@@ -503,12 +567,16 @@ async function main() {
       description: 'Custom CRM Dashboard Integration (Overdue Notice)',
       status: InvoiceStatus.Pending,
       discount: 0,
-      taxRate: 0.10,
-      paidAmount: 500.00, // Partial payment, balance remaining
+      taxRate: 0.1,
+      paidAmount: 500.0, // Partial payment, balance remaining
       customerIndex: 1, // Sarah
       items: [
-        { name: 'Salesforce API Two-Way Sync', quantity: 1, rate: 2900.00 },
-        { name: 'Webhook Event Listener Integration', quantity: 1, rate: 1100.00 },
+        { name: 'Salesforce API Two-Way Sync', quantity: 1, rate: 2900.0 },
+        {
+          name: 'Webhook Event Listener Integration',
+          quantity: 1,
+          rate: 1100.0,
+        },
       ],
     },
     {
@@ -518,13 +586,21 @@ async function main() {
       dueDate: '2026-08-15', // Past due date
       description: 'Legacy Data Migration & SQL Normalization',
       status: InvoiceStatus.Pending,
-      discount: 100.00,
-      taxRate: 0.10,
+      discount: 100.0,
+      taxRate: 0.1,
       paidAmount: 0, // Zero payment
       customerIndex: 2, // David
       items: [
-        { name: 'MySQL to PostgreSQL Schema Migration', quantity: 1, rate: 3500.00 },
-        { name: 'ETL Validation & Checksum Scripts', quantity: 1, rate: 1500.00 },
+        {
+          name: 'MySQL to PostgreSQL Schema Migration',
+          quantity: 1,
+          rate: 3500.0,
+        },
+        {
+          name: 'ETL Validation & Checksum Scripts',
+          quantity: 1,
+          rate: 1500.0,
+        },
       ],
     },
     {
@@ -534,13 +610,21 @@ async function main() {
       dueDate: '2026-09-01', // Past due date
       description: 'Single Sign-On (SSO) SAML 2.0 Integration',
       status: InvoiceStatus.Pending,
-      discount: 50.00,
-      taxRate: 0.10,
-      paidAmount: 1200.00,
+      discount: 50.0,
+      taxRate: 0.1,
+      paidAmount: 1200.0,
       customerIndex: 3, // Elena
       items: [
-        { name: 'Okta & Azure AD Identity Provider Setup', quantity: 1, rate: 2800.00 },
-        { name: 'RBAC Permission Matrix Implementation', quantity: 1, rate: 1200.00 },
+        {
+          name: 'Okta & Azure AD Identity Provider Setup',
+          quantity: 1,
+          rate: 2800.0,
+        },
+        {
+          name: 'RBAC Permission Matrix Implementation',
+          quantity: 1,
+          rate: 1200.0,
+        },
       ],
     },
     {
@@ -551,12 +635,20 @@ async function main() {
       description: 'Mobile Push Notifications Architecture',
       status: InvoiceStatus.Pending,
       discount: 0,
-      taxRate: 0.10,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 4, // Marcus
       items: [
-        { name: 'Firebase Cloud Messaging (FCM) Integration', quantity: 1, rate: 1800.00 },
-        { name: 'Apple Push Notification Service (APNs)', quantity: 1, rate: 1600.00 },
+        {
+          name: 'Firebase Cloud Messaging (FCM) Integration',
+          quantity: 1,
+          rate: 1800.0,
+        },
+        {
+          name: 'Apple Push Notification Service (APNs)',
+          quantity: 1,
+          rate: 1600.0,
+        },
       ],
     },
     {
@@ -566,13 +658,21 @@ async function main() {
       dueDate: '2026-09-20', // Past due date
       description: 'Financial Transaction Export Service (CSV/PDF)',
       status: InvoiceStatus.Pending,
-      discount: 40.00,
-      taxRate: 0.10,
-      paidAmount: 1500.00,
+      discount: 40.0,
+      taxRate: 0.1,
+      paidAmount: 1500.0,
       customerIndex: 5, // Amara
       items: [
-        { name: 'Automated PDF Generation Pipeline', quantity: 1, rate: 2100.00 },
-        { name: 'Async Background Job Queue (BullMQ)', quantity: 1, rate: 1400.00 },
+        {
+          name: 'Automated PDF Generation Pipeline',
+          quantity: 1,
+          rate: 2100.0,
+        },
+        {
+          name: 'Async Background Job Queue (BullMQ)',
+          quantity: 1,
+          rate: 1400.0,
+        },
       ],
     },
     {
@@ -583,12 +683,20 @@ async function main() {
       description: 'Real-Time WebSocket Chat Infrastructure',
       status: InvoiceStatus.Pending,
       discount: 0,
-      taxRate: 0.10,
-      paidAmount: 600.00,
+      taxRate: 0.1,
+      paidAmount: 600.0,
       customerIndex: 6, // Hiroshi
       items: [
-        { name: 'Socket.io Gateway with Redis PubSub', quantity: 1, rate: 2600.00 },
-        { name: 'Message History Pagination & Retention', quantity: 1, rate: 1000.00 },
+        {
+          name: 'Socket.io Gateway with Redis PubSub',
+          quantity: 1,
+          rate: 2600.0,
+        },
+        {
+          name: 'Message History Pagination & Retention',
+          quantity: 1,
+          rate: 1000.0,
+        },
       ],
     },
     {
@@ -598,13 +706,17 @@ async function main() {
       dueDate: '2026-09-30', // Past due date
       description: 'GraphQL API Gateway & Federation',
       status: InvoiceStatus.Pending,
-      discount: 100.00,
-      taxRate: 0.10,
+      discount: 100.0,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 7, // Chloe
       items: [
-        { name: 'Apollo Federation Gateway Setup', quantity: 1, rate: 3600.00 },
-        { name: 'Schema Stitching & DataLoader Batching', quantity: 1, rate: 1800.00 },
+        { name: 'Apollo Federation Gateway Setup', quantity: 1, rate: 3600.0 },
+        {
+          name: 'Schema Stitching & DataLoader Batching',
+          quantity: 1,
+          rate: 1800.0,
+        },
       ],
     },
 
@@ -617,12 +729,20 @@ async function main() {
       description: 'Accessibility (WCAG 2.1 AA) Compliance Audit',
       status: InvoiceStatus.Pending,
       discount: 0,
-      taxRate: 0.10,
-      paidAmount: 1000.00,
+      taxRate: 0.1,
+      paidAmount: 1000.0,
       customerIndex: 8, // Oliver
       items: [
-        { name: 'Screen Reader & Keyboard Nav Remediation', quantity: 12, rate: 150.00 },
-        { name: 'Color Contrast & ARIA Markup Optimization', quantity: 1, rate: 800.00 },
+        {
+          name: 'Screen Reader & Keyboard Nav Remediation',
+          quantity: 12,
+          rate: 150.0,
+        },
+        {
+          name: 'Color Contrast & ARIA Markup Optimization',
+          quantity: 1,
+          rate: 800.0,
+        },
       ],
     },
     {
@@ -632,12 +752,20 @@ async function main() {
       dueDate: '2026-09-25',
       description: 'Dark Mode Theme Implementation & Tailwind Styling',
       status: InvoiceStatus.Paid,
-      discount: 50.00,
-      taxRate: 0.10,
+      discount: 50.0,
+      taxRate: 0.1,
       customerIndex: 9, // Priya
       items: [
-        { name: 'Tailwind CSS Design Tokens Configuration', quantity: 1, rate: 1200.00 },
-        { name: 'Component Palette Responsive Review', quantity: 1, rate: 900.00 },
+        {
+          name: 'Tailwind CSS Design Tokens Configuration',
+          quantity: 1,
+          rate: 1200.0,
+        },
+        {
+          name: 'Component Palette Responsive Review',
+          quantity: 1,
+          rate: 900.0,
+        },
       ],
     },
     {
@@ -647,13 +775,21 @@ async function main() {
       dueDate: '2026-11-02',
       description: 'AI-Powered Invoice OCR Data Extraction Module',
       status: InvoiceStatus.Draft,
-      discount: 150.00,
-      taxRate: 0.10,
+      discount: 150.0,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 10, // Lucas
       items: [
-        { name: 'Gemini Vision Document Parser Pipeline', quantity: 1, rate: 4200.00 },
-        { name: 'Structured JSON Schema Output Validation', quantity: 1, rate: 1800.00 },
+        {
+          name: 'Gemini Vision Document Parser Pipeline',
+          quantity: 1,
+          rate: 4200.0,
+        },
+        {
+          name: 'Structured JSON Schema Output Validation',
+          quantity: 1,
+          rate: 1800.0,
+        },
       ],
     },
     {
@@ -664,10 +800,14 @@ async function main() {
       description: 'SSL Certificate Renewal & Automated ACME Bot',
       status: InvoiceStatus.Paid,
       discount: 0,
-      taxRate: 0.10,
+      taxRate: 0.1,
       customerIndex: 1, // Sarah
       items: [
-        { name: 'Wildcard Domain SSL Renewal & Nginx Deploy', quantity: 1, rate: 450.00 },
+        {
+          name: 'Wildcard Domain SSL Renewal & Nginx Deploy',
+          quantity: 1,
+          rate: 450.0,
+        },
       ],
     },
     {
@@ -677,12 +817,20 @@ async function main() {
       dueDate: '2026-09-10',
       description: 'CloudFront CDN Multi-Region Edge Caching',
       status: InvoiceStatus.Paid,
-      discount: 25.00,
-      taxRate: 0.10,
+      discount: 25.0,
+      taxRate: 0.1,
       customerIndex: 2, // David
       items: [
-        { name: 'CDN Cache Invalidation Lambda@Edge', quantity: 1, rate: 1350.00 },
-        { name: 'Static Asset Compression (Brotli/Gzip)', quantity: 1, rate: 600.00 },
+        {
+          name: 'CDN Cache Invalidation Lambda@Edge',
+          quantity: 1,
+          rate: 1350.0,
+        },
+        {
+          name: 'Static Asset Compression (Brotli/Gzip)',
+          quantity: 1,
+          rate: 600.0,
+        },
       ],
     },
     {
@@ -693,12 +841,20 @@ async function main() {
       description: 'Disaster Recovery & Hot Standby Replication',
       status: InvoiceStatus.Pending,
       discount: 0,
-      taxRate: 0.10,
-      paidAmount: 1000.00,
+      taxRate: 0.1,
+      paidAmount: 1000.0,
       customerIndex: 3, // Elena
       items: [
-        { name: 'Cross-Region RDS Read Replica Setup', quantity: 1, rate: 2500.00 },
-        { name: 'Failover Automation & Health Probes', quantity: 1, rate: 1500.00 },
+        {
+          name: 'Cross-Region RDS Read Replica Setup',
+          quantity: 1,
+          rate: 2500.0,
+        },
+        {
+          name: 'Failover Automation & Health Probes',
+          quantity: 1,
+          rate: 1500.0,
+        },
       ],
     },
     {
@@ -708,13 +864,21 @@ async function main() {
       dueDate: '2026-10-29',
       description: 'Kubernetes Pod Autoscaling (HPA) & Load Testing',
       status: InvoiceStatus.Pending,
-      discount: 50.00,
-      taxRate: 0.10,
+      discount: 50.0,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 4, // Marcus
       items: [
-        { name: 'K6 Distributed Load Testing Scenarios', quantity: 1, rate: 2100.00 },
-        { name: 'Cluster Metrics Server & HPA Tuning', quantity: 1, rate: 1200.00 },
+        {
+          name: 'K6 Distributed Load Testing Scenarios',
+          quantity: 1,
+          rate: 2100.0,
+        },
+        {
+          name: 'Cluster Metrics Server & HPA Tuning',
+          quantity: 1,
+          rate: 1200.0,
+        },
       ],
     },
     {
@@ -725,22 +889,33 @@ async function main() {
       description: 'Code Quality Governance & SonarQube Integration',
       status: InvoiceStatus.Draft,
       discount: 0,
-      taxRate: 0.10,
+      taxRate: 0.1,
       paidAmount: 0,
       customerIndex: 5, // Amara
       items: [
-        { name: 'SonarQube Quality Gate Automation', quantity: 1, rate: 1600.00 },
-        { name: 'Technical Debt Remediation Roadmap', quantity: 1, rate: 900.00 },
+        {
+          name: 'SonarQube Quality Gate Automation',
+          quantity: 1,
+          rate: 1600.0,
+        },
+        {
+          name: 'Technical Debt Remediation Roadmap',
+          quantity: 1,
+          rate: 900.0,
+        },
       ],
     },
   ];
 
   for (const inv of diverseInvoices) {
     // 1. Calculate financial totals
-    const invoiceSubTotal = inv.items.reduce((sum, item) => sum + item.quantity * item.rate, 0);
+    const invoiceSubTotal = inv.items.reduce(
+      (sum, item) => sum + item.quantity * item.rate,
+      0,
+    );
     const totalDiscount = inv.discount ?? 0;
     const discountedTotal = Math.max(0, invoiceSubTotal - totalDiscount);
-    const taxRate = inv.taxRate ?? 0.10;
+    const taxRate = inv.taxRate ?? 0.1;
     const totalTax = Math.round(discountedTotal * taxRate * 100) / 100;
     const totalAmount = Math.round((discountedTotal + totalTax) * 100) / 100;
 
@@ -750,7 +925,8 @@ async function main() {
     } else if (inv.paidAmount !== undefined) {
       totalPaid = Math.min(totalAmount, inv.paidAmount);
     }
-    const balanceAmount = Math.round(Math.max(0, totalAmount - totalPaid) * 100) / 100;
+    const balanceAmount =
+      Math.round(Math.max(0, totalAmount - totalPaid) * 100) / 100;
 
     const customer = createdCustomers[inv.customerIndex];
 
@@ -772,7 +948,9 @@ async function main() {
         balanceAmount,
         createdBy: reviewerUser.id,
         customerId: customer.id,
-        createdAt: inv.createdAt ? new Date(inv.createdAt) : new Date(inv.invoiceDate),
+        createdAt: inv.createdAt
+          ? new Date(inv.createdAt)
+          : new Date(inv.invoiceDate),
         items: {
           create: inv.items.map((it) => ({
             name: it.name,
