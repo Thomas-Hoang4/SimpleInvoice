@@ -1,0 +1,13 @@
+node_modules
+.git
+.github
+.idea
+.vscode
+dist
+coverage
+*.log
+backend/dist
+backend/coverage
+frontend/dist
+frontend/coverage
+.vite
