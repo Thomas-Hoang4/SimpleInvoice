@@ -89,3 +89,23 @@ export class InvoiceResponseDto {
   @ApiProperty({ example: 'ad1e0902-1928-4345-b513-60c86c94fc91' })
   createdBy: string;
 }
+
+export class PagingDto {
+  @ApiProperty({ example: 1 })
+  page: number;
+
+  @ApiProperty({ example: 10 })
+  pageSize: number;
+
+  @ApiProperty({ example: 36 })
+  total: number;
+}
+
+export class PaginatedInvoicesResponseDto {
+  @ApiProperty({ type: [InvoiceResponseDto] })
+  data: InvoiceResponseDto[];
+
+  @ApiProperty({ type: PagingDto })
+  paging: PagingDto;
+}
+

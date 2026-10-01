@@ -1,6 +1,10 @@
 import { jest } from '@jest/globals';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ConflictException, BadRequestException } from '@nestjs/common';
+import {
+  ConflictException,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InvoicesService } from './invoices.service';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -11,6 +15,9 @@ describe('InvoicesService', () => {
   const mockPrisma = {
     invoice: {
       findUnique: jest.fn(),
+      findFirst: jest.fn(),
+      findMany: jest.fn(),
+      count: jest.fn(),
       create: jest.fn(),
     },
     customer: {
@@ -201,6 +208,125 @@ describe('InvoicesService', () => {
 
       const result = await service.create('user-id-123', pastDto as any);
       expect(result.status).toBe('Overdue');
+    });
+  });
+
+  describe('findAll', () => {
+    it('should query invoices with pagination, sorting, and format results', async () => {
+      const mockInvoices = [
+        {
+          invoiceId: 'inv-1',
+          invoiceNumber: 'INV-001',
+          invoiceDate: new Date('2026-11-01'),
+          dueDate: new Date('2026-12-01'),
+          status: 'Draft',
+          invoiceSubTotal: 100,
+          totalTax: 10,
+          totalDiscount: 0,
+          totalAmount: 110,
+          totalPaid: 0,
+          balanceAmount: 110,
+          customer: { fullname: 'Paul' },
+          items: [],
+        },
+      ];
+
+      jest.spyOn(prisma.invoice, 'findMany').mockResolvedValue(mockInvoices as any);
+      jest.spyOn(prisma.invoice, 'count').mockResolvedValue(1);
+
+      const result = await service.findAll({
+        page: 1,
+        pageSize: 10,
+        sortBy: 'invoiceDate',
+        ordering: 'DESC',
+      });
+
+      expect(prisma.invoice.findMany).toHaveBeenCalled();
+      expect(prisma.invoice.count).toHaveBeenCalled();
+      expect(result.data).toHaveLength(1);
+      expect(result.paging).toEqual({ page: 1, pageSize: 10, total: 1 });
+      expect(result.data[0].status).toBe('Draft');
+    });
+
+    it('should query with status Overdue filtering non-Paid and past dueDate', async () => {
+      jest.spyOn(prisma.invoice, 'findMany').mockResolvedValue([]);
+      jest.spyOn(prisma.invoice, 'count').mockResolvedValue(0);
+
+      await service.findAll({ status: 'Overdue' });
+
+      expect(prisma.invoice.findMany).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: expect.objectContaining({
+            status: { not: 'Paid' },
+          }),
+        }),
+      );
+    });
+
+    it('should filter by keyword and date range', async () => {
+      jest.spyOn(prisma.invoice, 'findMany').mockResolvedValue([]);
+      jest.spyOn(prisma.invoice, 'count').mockResolvedValue(0);
+
+      await service.findAll({
+        keyword: 'Paul',
+        fromDate: '2026-01-01',
+        toDate: '2026-12-31',
+      });
+
+      expect(prisma.invoice.findMany).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: expect.objectContaining({
+            OR: [
+              { invoiceNumber: { contains: 'Paul', mode: 'insensitive' } },
+              { customer: { fullname: { contains: 'Paul', mode: 'insensitive' } } },
+            ],
+            invoiceDate: expect.any(Object),
+          }),
+        }),
+      );
+    });
+  });
+
+  describe('findOne', () => {
+    it('should return formatted invoice when invoice exists by ID or number', async () => {
+      const mockInvoice = {
+        invoiceId: 'inv-1',
+        invoiceNumber: 'INV-001',
+        invoiceDate: new Date('2026-11-01'),
+        dueDate: new Date('2026-12-01'),
+        status: 'Draft',
+        invoiceSubTotal: 500,
+        totalTax: 50,
+        totalDiscount: 0,
+        totalAmount: 550,
+        totalPaid: 0,
+        balanceAmount: 550,
+        customer: { id: 'c1', fullname: 'Paul', email: 'paul@101digital.io' },
+        items: [{ id: 'i1', name: 'Service', quantity: 1, rate: 500 }],
+      };
+
+      jest.spyOn(prisma.invoice, 'findFirst').mockResolvedValue(mockInvoice as any);
+
+      const result = await service.findOne('inv-1');
+      expect(prisma.invoice.findFirst).toHaveBeenCalledWith({
+        where: {
+          OR: [{ invoiceId: 'inv-1' }, { invoiceNumber: 'inv-1' }],
+        },
+        include: {
+          customer: true,
+          items: true,
+        },
+      });
+      expect(result.invoiceId).toBe('inv-1');
+      expect(result.status).toBe('Draft');
+    });
+
+    it('should throw NotFoundException when invoice does not exist', async () => {
+      jest.spyOn(prisma.invoice, 'findFirst').mockResolvedValue(null);
+
+      await expect(service.findOne('non-existent')).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 });

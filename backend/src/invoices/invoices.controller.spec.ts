@@ -9,6 +9,8 @@ describe('InvoicesController', () => {
 
   const mockInvoicesService = {
     create: jest.fn(),
+    findAll: jest.fn(),
+    findOne: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -30,6 +32,38 @@ describe('InvoicesController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  describe('findAll', () => {
+    it('should delegate listing to InvoicesService', async () => {
+      const query = { page: 1, pageSize: 10, keyword: 'Paul' };
+      const expectedResponse = {
+        data: [],
+        paging: { page: 1, pageSize: 10, total: 0 },
+      };
+
+      jest.spyOn(service, 'findAll').mockResolvedValue(expectedResponse as any);
+
+      const result = await controller.findAll(query as any);
+      expect(service.findAll).toHaveBeenCalledWith(query);
+      expect(result).toEqual(expectedResponse);
+    });
+  });
+
+  describe('findOne', () => {
+    it('should delegate findOne to InvoicesService with id', async () => {
+      const invoiceId = 'inv-uuid-1';
+      const expectedInvoice = {
+        invoiceId,
+        invoiceNumber: 'INV-TEST-001',
+      };
+
+      jest.spyOn(service, 'findOne').mockResolvedValue(expectedInvoice as any);
+
+      const result = await controller.findOne(invoiceId);
+      expect(service.findOne).toHaveBeenCalledWith(invoiceId);
+      expect(result).toEqual(expectedInvoice);
+    });
   });
 
   describe('create', () => {

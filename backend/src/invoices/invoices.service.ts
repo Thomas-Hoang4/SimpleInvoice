@@ -2,10 +2,12 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { InvoiceStatus, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateInvoiceDto } from './dto/create-invoice.dto';
+import { QueryInvoicesDto } from './dto/query-invoices.dto';
 import {
   calculateInvoiceAmounts,
   deriveInvoiceStatus,
@@ -163,5 +165,101 @@ export class InvoicesService {
     );
 
     return this.formatInvoice(createdInvoice);
+  }
+
+  async findAll(query: QueryInvoicesDto) {
+    const page = Math.max(1, Number(query.page || 1));
+    const pageSize = Math.max(1, Number(query.pageSize || 10));
+    const skip = (page - 1) * pageSize;
+    const take = pageSize;
+
+    const sortBy = query.sortBy || 'invoiceDate';
+    const sortOrder =
+      (query.ordering || 'DESC').toLowerCase() === 'asc' ? 'asc' : 'desc';
+    const orderBy: Prisma.InvoiceOrderByWithRelationInput = {
+      [sortBy]: sortOrder,
+    };
+
+    const where: Prisma.InvoiceWhereInput = {};
+
+    // 1. Keyword search (case-insensitive on invoiceNumber or customer fullname)
+    if (query.keyword && query.keyword.trim()) {
+      const term = query.keyword.trim();
+      where.OR = [
+        { invoiceNumber: { contains: term, mode: 'insensitive' } },
+        { customer: { fullname: { contains: term, mode: 'insensitive' } } },
+      ];
+    }
+
+    // 2. Date filters (invoiceDate range)
+    if (query.fromDate || query.toDate) {
+      where.invoiceDate = {};
+      if (query.fromDate) {
+        where.invoiceDate.gte = new Date(query.fromDate);
+      }
+      if (query.toDate) {
+        where.invoiceDate.lte = new Date(query.toDate);
+      }
+    }
+
+    // 3. Status filter with dynamic Overdue handling
+    const startOfToday = new Date();
+    startOfToday.setUTCHours(0, 0, 0, 0);
+
+    if (query.status === 'Overdue') {
+      where.status = { not: InvoiceStatus.Paid };
+      where.dueDate = { lt: startOfToday };
+    } else if (query.status === 'Paid') {
+      where.status = InvoiceStatus.Paid;
+    } else if (query.status === 'Pending') {
+      where.status = InvoiceStatus.Pending;
+      where.dueDate = { gte: startOfToday };
+    } else if (query.status === 'Draft') {
+      where.status = InvoiceStatus.Draft;
+      where.dueDate = { gte: startOfToday };
+    }
+
+    const [invoices, total] = await Promise.all([
+      this.prisma.invoice.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        include: {
+          customer: true,
+          items: true,
+        },
+      }),
+      this.prisma.invoice.count({ where }),
+    ]);
+
+    const formattedData = invoices.map((inv) => this.formatInvoice(inv));
+
+    return {
+      data: formattedData,
+      paging: {
+        page,
+        pageSize,
+        total,
+      },
+    };
+  }
+
+  async findOne(id: string) {
+    const invoice = await this.prisma.invoice.findFirst({
+      where: {
+        OR: [{ invoiceId: id }, { invoiceNumber: id }],
+      },
+      include: {
+        customer: true,
+        items: true,
+      },
+    });
+
+    if (!invoice) {
+      throw new NotFoundException('Invoice not found');
+    }
+
+    return this.formatInvoice(invoice);
   }
 }
