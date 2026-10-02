@@ -70,7 +70,7 @@ describe('InvoicesController', () => {
     it('should delegate invoice creation to InvoicesService', async () => {
       const dto = {
         customerName: 'Paul',
-        customerEmail: 'paul@101digital.io',
+        customerEmail: 'paul@simpleinvoice.dev',
         invoiceNumber: 'INV-TEST-001',
         invoiceDate: '2026-06-03',
         dueDate: '2026-07-03',

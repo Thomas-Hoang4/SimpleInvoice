@@ -29,7 +29,7 @@ services:
       PORT: 3000
       NODE_ENV: production
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-simple_invoice}?schema=public
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-key-replace-in-production-101digital}
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-key-replace-in-production}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-3600s}
     depends_on:
       postgres:

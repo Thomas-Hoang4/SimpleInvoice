@@ -13,7 +13,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     JwtModule.register({
       secret:
         process.env.JWT_SECRET ||
-        'super-secret-jwt-key-replace-in-production-101digital',
+        'super-secret-jwt-key-replace-in-production',
       signOptions: {
         expiresIn: (process.env.JWT_EXPIRES_IN || '3600s') as any,
       },

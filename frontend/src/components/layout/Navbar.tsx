@@ -37,7 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
                   SimpleInvoice
                 </span>
                 <span className="text-[10px] font-medium text-slate-400 block -mt-1">
-                  101 Digital
+                  Platform
                 </span>
               </div>
             </button>

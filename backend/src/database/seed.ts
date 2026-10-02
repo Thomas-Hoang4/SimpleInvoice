@@ -45,7 +45,7 @@ async function main() {
   const reviewerUser = await prisma.user.create({
     data: {
       id: 'ad1e0902-1928-4345-b513-60c86c94fc91', // Exact Appendix A createdBy ID
-      email: 'reviewer@101digital.io',
+      email: 'reviewer@simpleinvoice.dev',
       passwordHash: reviewerPasswordHash,
       fullname: 'Reviewer User',
     },
@@ -67,7 +67,7 @@ async function main() {
   const customerData = [
     {
       fullname: 'Paul',
-      email: 'paul@101digital.io',
+      email: 'paul@simpleinvoice.dev',
       address: 'Singapore',
       mobileNumber: '947717364111',
     },

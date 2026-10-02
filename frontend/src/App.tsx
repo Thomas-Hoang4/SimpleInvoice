@@ -41,7 +41,7 @@ function AppContent() {
                 SimpleInvoice
               </h1>
               <p className="text-xs text-slate-500 font-medium">
-                101 Digital Technical Assessment
+                Invoicing &amp; Billing Platform
               </p>
             </div>
           </div>

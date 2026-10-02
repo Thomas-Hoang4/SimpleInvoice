@@ -36,14 +36,14 @@ describe('AuthController', () => {
   describe('login', () => {
     it('should delegate login to AuthService and return response', async () => {
       const loginDto = {
-        email: 'reviewer@101digital.io',
+        email: 'reviewer@simpleinvoice.dev',
         password: 'Password123!',
       };
       const expectedResponse = {
         accessToken: 'mocked.jwt.token',
         user: {
           id: 'user-uuid-1',
-          email: 'reviewer@101digital.io',
+          email: 'reviewer@simpleinvoice.dev',
           fullname: 'Reviewer User',
           createdAt: new Date('2026-10-01T00:00:00.000Z'),
         },
@@ -62,7 +62,7 @@ describe('AuthController', () => {
       const userParam = { id: 'user-uuid-1' };
       const expectedUser = {
         id: 'user-uuid-1',
-        email: 'reviewer@101digital.io',
+        email: 'reviewer@simpleinvoice.dev',
         fullname: 'Reviewer User',
         createdAt: new Date(),
       };

@@ -12,7 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       ignoreExpiration: false,
       secretOrKey:
         process.env.JWT_SECRET ||
-        'super-secret-jwt-key-replace-in-production-101digital',
+        'super-secret-jwt-key-replace-in-production',
     });
   }
 

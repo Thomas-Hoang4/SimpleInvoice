@@ -8,10 +8,10 @@ describe('App Component', () => {
     expect(screen.getByText('SimpleInvoice')).toBeInTheDocument();
   });
 
-  it('renders assessment subtitle and authentication form', () => {
+  it('renders application subtitle and authentication form', () => {
     render(<App />);
     expect(
-      screen.getByText(/101 digital technical assessment/i),
+      screen.getByText(/invoicing & billing platform/i),
     ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
   });

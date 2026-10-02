@@ -6,7 +6,7 @@ describe('ReviewerQuickFill Component', () => {
   it('renders reviewer credentials information', () => {
     render(<ReviewerQuickFill onFill={vi.fn()} />);
     expect(screen.getByText('Reviewer Demo Access')).toBeInTheDocument();
-    expect(screen.getByText('reviewer@101digital.io')).toBeInTheDocument();
+    expect(screen.getByText('reviewer@simpleinvoice.dev')).toBeInTheDocument();
     expect(screen.getByText('Password123!')).toBeInTheDocument();
   });
 
@@ -18,7 +18,7 @@ describe('ReviewerQuickFill Component', () => {
     fireEvent.click(quickFillBtn);
 
     expect(handleFill).toHaveBeenCalledWith({
-      email: 'reviewer@101digital.io',
+      email: 'reviewer@simpleinvoice.dev',
       pass: 'Password123!',
     });
   });

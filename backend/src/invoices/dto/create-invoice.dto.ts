@@ -66,7 +66,7 @@ export class CreateInvoiceDto {
   @IsNotEmpty({ message: 'customer name must not be empty' })
   customerName: string;
 
-  @ApiProperty({ example: 'paul@101digital.io', description: 'Customer email' })
+  @ApiProperty({ example: 'paul@simpleinvoice.dev', description: 'Customer email' })
   @IsEmail({}, { message: 'customer email must be a valid email' })
   @IsNotEmpty({ message: 'customer email must not be empty' })
   customerEmail: string;

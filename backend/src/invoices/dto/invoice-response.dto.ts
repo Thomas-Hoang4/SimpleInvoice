@@ -7,7 +7,7 @@ export class CustomerResponseDto {
   @ApiProperty({ example: 'Paul' })
   fullname: string;
 
-  @ApiProperty({ example: 'paul@101digital.io' })
+  @ApiProperty({ example: 'paul@simpleinvoice.dev' })
   email: string;
 
   @ApiPropertyOptional({ example: '947717364111' })

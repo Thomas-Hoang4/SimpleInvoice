@@ -13,7 +13,7 @@ describe('AuthService', () => {
 
   const mockUser = {
     id: 'user-uuid-1',
-    email: 'reviewer@101digital.io',
+    email: 'reviewer@simpleinvoice.dev',
     passwordHash: bcrypt.hashSync('Password123!', 10),
     fullname: 'Reviewer User',
     createdAt: new Date('2026-10-01T00:00:00.000Z'),
@@ -56,12 +56,12 @@ describe('AuthService', () => {
       jest.spyOn(prisma.user, 'findUnique').mockResolvedValue(mockUser as any);
 
       const result = await service.login({
-        email: 'reviewer@101digital.io',
+        email: 'reviewer@simpleinvoice.dev',
         password: 'Password123!',
       });
 
       expect(prisma.user.findUnique).toHaveBeenCalledWith({
-        where: { email: 'reviewer@101digital.io' },
+        where: { email: 'reviewer@simpleinvoice.dev' },
       });
       expect(jwtService.sign).toHaveBeenCalledWith({
         sub: mockUser.id,
@@ -94,7 +94,7 @@ describe('AuthService', () => {
 
       await expect(
         service.login({
-          email: 'reviewer@101digital.io',
+          email: 'reviewer@simpleinvoice.dev',
           password: 'WrongPassword!',
         }),
       ).rejects.toThrow(UnauthorizedException);

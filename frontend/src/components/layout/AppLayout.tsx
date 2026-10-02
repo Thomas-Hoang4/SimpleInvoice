@@ -19,7 +19,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
         {children}
       </main>
       <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-        <p>SimpleInvoice — 101 Digital Full-Stack Engineering Assessment</p>
+        <p>SimpleInvoice — Invoicing &amp; Billing Platform</p>
       </footer>
     </div>
   );

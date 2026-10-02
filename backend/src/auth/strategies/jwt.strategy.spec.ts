@@ -37,10 +37,10 @@ describe('JwtStrategy', () => {
 
   describe('validate', () => {
     it('should return user when payload matches existing user', async () => {
-      const payload = { sub: 'user-uuid-1', email: 'reviewer@101digital.io' };
+      const payload = { sub: 'user-uuid-1', email: 'reviewer@simpleinvoice.dev' };
       const user = {
         id: 'user-uuid-1',
-        email: 'reviewer@101digital.io',
+        email: 'reviewer@simpleinvoice.dev',
         fullname: 'Reviewer User',
         createdAt: new Date(),
       };

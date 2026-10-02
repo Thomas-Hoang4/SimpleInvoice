@@ -13,7 +13,7 @@ describe('Invoices API (e2e)', () => {
   // In-memory store for E2E persistence simulation
   const mockUser = {
     id: 'ad1e0902-1928-4345-b513-60c86c94fc91',
-    email: 'reviewer@101digital.io',
+    email: 'reviewer@simpleinvoice.dev',
     passwordHash: bcrypt.hashSync('Password123!', 10),
     fullname: 'Reviewer User',
     createdAt: new Date('2026-06-01T00:00:00Z'),
@@ -126,7 +126,7 @@ describe('Invoices API (e2e)', () => {
       const res = await request(app.getHttpServer())
         .post('/auth/login')
         .send({
-          email: 'reviewer@101digital.io',
+          email: 'reviewer@simpleinvoice.dev',
           password: 'IncorrectPassword!',
         })
         .expect(401);
@@ -142,7 +142,7 @@ describe('Invoices API (e2e)', () => {
       const res = await request(app.getHttpServer())
         .post('/auth/login')
         .send({
-          email: 'reviewer@101digital.io',
+          email: 'reviewer@simpleinvoice.dev',
           password: 'Password123!',
         })
         .expect(200);
@@ -150,7 +150,7 @@ describe('Invoices API (e2e)', () => {
       expect(res.body).toHaveProperty('accessToken');
       expect(res.body.user).toMatchObject({
         id: mockUser.id,
-        email: 'reviewer@101digital.io',
+        email: 'reviewer@simpleinvoice.dev',
         fullname: 'Reviewer User',
       });
 
@@ -165,7 +165,7 @@ describe('Invoices API (e2e)', () => {
 
       expect(res.body).toMatchObject({
         id: mockUser.id,
-        email: 'reviewer@101digital.io',
+        email: 'reviewer@simpleinvoice.dev',
         fullname: 'Reviewer User',
       });
     });

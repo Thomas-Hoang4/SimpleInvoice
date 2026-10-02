@@ -10,7 +10,7 @@ export const ReviewerQuickFill: React.FC<ReviewerQuickFillProps> = ({
 }) => {
   const handleQuickFill = () => {
     onFill({
-      email: 'reviewer@101digital.io',
+      email: 'reviewer@simpleinvoice.dev',
       pass: 'Password123!',
     });
   };
@@ -37,7 +37,7 @@ export const ReviewerQuickFill: React.FC<ReviewerQuickFillProps> = ({
         <p>
           <span className="font-semibold text-indigo-900">Email:</span>{' '}
           <code className="bg-indigo-100/70 px-1 py-0.5 rounded text-indigo-950">
-            reviewer@101digital.io
+            reviewer@simpleinvoice.dev
           </code>
         </p>
         <p>

@@ -35,7 +35,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
           SimpleInvoice
         </h2>
         <p className="mt-1 text-xs text-slate-500">
-          101 Digital Technical Assessment — Authentication Portal
+          Invoicing &amp; Billing Platform — Authentication Portal
         </p>
       </div>
 
@@ -45,7 +45,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onNavigate }) => {
         </Card>
 
         <p className="mt-6 text-center text-xs text-slate-400">
-          Protected System &bull; 101 Digital Assessment Specification
+          Protected System &bull; Authorized Access Only
         </p>
       </div>
     </div>

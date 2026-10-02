@@ -4,7 +4,7 @@ export class UserResponseDto {
   @ApiProperty({ example: 'd3b07384-d113-494b-9c8e-bf3f8e438e8e' })
   id: string;
 
-  @ApiProperty({ example: 'reviewer@101digital.io' })
+  @ApiProperty({ example: 'reviewer@simpleinvoice.dev' })
   email: string;
 
   @ApiProperty({ example: 'Reviewer User' })

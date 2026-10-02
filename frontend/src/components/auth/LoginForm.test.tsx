@@ -46,7 +46,7 @@ describe('LoginForm Component', () => {
     const emailInput = screen.getByLabelText(/email address/i) as HTMLInputElement;
     const passwordInput = screen.getByLabelText(/password/i) as HTMLInputElement;
 
-    expect(emailInput.value).toBe('reviewer@101digital.io');
+    expect(emailInput.value).toBe('reviewer@simpleinvoice.dev');
     expect(passwordInput.value).toBe('Password123!');
   });
 });

@@ -14,7 +14,7 @@ const TestConsumer = () => {
         onClick={() =>
           login('mock-jwt-token', {
             id: 'u1',
-            email: 'reviewer@101digital.io',
+            email: 'reviewer@simpleinvoice.dev',
             fullname: 'Reviewer',
           })
         }
@@ -57,7 +57,7 @@ describe('AuthContext', () => {
 
     expect(screen.getByTestId('auth-status')).toHaveTextContent('Authenticated');
     expect(screen.getByTestId('user-email')).toHaveTextContent(
-      'reviewer@101digital.io',
+      'reviewer@simpleinvoice.dev',
     );
     expect(localStorage.getItem('auth_token')).toBe('mock-jwt-token');
 

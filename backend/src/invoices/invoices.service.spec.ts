@@ -52,7 +52,7 @@ describe('InvoicesService', () => {
   describe('create', () => {
     const validDto = {
       customerName: 'Paul',
-      customerEmail: 'paul@101digital.io',
+      customerEmail: 'paul@simpleinvoice.dev',
       customerMobile: '947717364111',
       customerAddress: 'Singapore',
       invoiceNumber: 'INV-TEST-001',
@@ -98,7 +98,7 @@ describe('InvoicesService', () => {
       const mockCustomer = {
         id: 'cust-id-1',
         fullname: 'Paul',
-        email: 'paul@101digital.io',
+        email: 'paul@simpleinvoice.dev',
         mobileNumber: '947717364111',
         address: 'Singapore',
       };
@@ -186,7 +186,7 @@ describe('InvoicesService', () => {
         totalAmount: 2200,
         totalPaid: 0,
         balanceAmount: 2200,
-        customer: { id: 'c1', fullname: 'Paul', email: 'paul@101digital.io' },
+        customer: { id: 'c1', fullname: 'Paul', email: 'paul@simpleinvoice.dev' },
         items: [{ id: 'i1', name: 'Honda', quantity: 2, rate: 1000 }],
       };
 
@@ -301,7 +301,7 @@ describe('InvoicesService', () => {
         totalAmount: 550,
         totalPaid: 0,
         balanceAmount: 550,
-        customer: { id: 'c1', fullname: 'Paul', email: 'paul@101digital.io' },
+        customer: { id: 'c1', fullname: 'Paul', email: 'paul@simpleinvoice.dev' },
         items: [{ id: 'i1', name: 'Service', quantity: 1, rate: 500 }],
       };
 
