@@ -16,16 +16,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Enable Corepack & Yarn Berry
+        run: |
+          corepack enable
+          corepack prepare yarn@4.10.3 --activate
+
       - name: Set up Node.js 22.x
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: 'yarn'
-
-      - name: Enable Corepack & Yarn Berry
-        run: |
-          corepack enable
-          corepack prepare yarn@4.10.3 --activate
 
       - name: Install dependencies
         run: yarn install
