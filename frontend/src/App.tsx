@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import { LoginPage } from './pages/LoginPage';
 import { CreateInvoicePage } from './pages/CreateInvoicePage';
 import { InvoiceListPage } from './pages/InvoiceListPage';
+import { InvoiceDetailPage } from './pages/InvoiceDetailPage';
 import { AppLayout } from './components/layout/AppLayout';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
 
@@ -36,6 +37,11 @@ function AppContent() {
   const renderContent = () => {
     if (currentPath === '/invoices/new') {
       return <CreateInvoicePage onNavigate={navigate} />;
+    }
+
+    if (currentPath.startsWith('/invoices/') && currentPath !== '/invoices/new') {
+      const invoiceId = currentPath.replace('/invoices/', '');
+      return <InvoiceDetailPage invoiceId={invoiceId} onNavigate={navigate} />;
     }
 
     // Default: Invoices list view
