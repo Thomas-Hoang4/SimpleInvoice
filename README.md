@@ -28,6 +28,36 @@ The database seed script initializes ready-to-test reviewer accounts:
 
 ---
 
+## 📚 Documentation
+
+Detailed documentation is available in the [`docs/`](docs/README.md) folder:
+- [Architecture](docs/architecture.md) — System components, data flow, monorepo layout, and key design decisions.
+- [API Reference](docs/api.md) — Endpoints, query parameters, request/response formats, and error codes.
+- [Database Schema](docs/database.md) — PostgreSQL schema, Prisma models, relations, indexes, and seed data.
+- [Business Logic & Rules](docs/business-logic.md) — Calculation formulas, rounding rules, and read-time overdue derivation.
+- [Setup & Deployment](docs/setup.md) — Prerequisites, running locally, Docker Compose, and testing.
+
+---
+
+## 📸 Screenshots
+
+### 1. Authentication & Reviewer Demo Access
+Login portal with 1-click reviewer credential autofill.
+
+![Login Screen](docs/screenshots/0EDBE8A0-5051-4D89-9313-18CC37DFCFC3.png)
+
+### 2. Invoice Management & Filtering
+Paginated table view with debounced search, status chips (`Draft`, `Pending`, `Paid`, `Overdue`), and date range filters.
+
+![Invoice List Screen](docs/screenshots/6CA8AA89-1C3C-4846-842C-82FF267813C1.png)
+
+### 3. Invoice Detail & Financial Breakdown
+Itemized line items, customer billing profile, financial summary, and print actions.
+
+![Invoice Details Screen](docs/screenshots/C8501494-B737-4B14-A26C-CC0F6F1A6BE8.png)
+
+---
+
 ## 🚀 Running the Project
 
 ### Option A: Docker Compose (Recommended — Zero Setup)
