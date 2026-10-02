@@ -51,6 +51,14 @@ async function main() {
     },
   });
 
+  const reviewer101 = await prisma.user.create({
+    data: {
+      email: 'reviewer@101digital.io',
+      passwordHash: reviewerPasswordHash,
+      fullname: '101 Digital Reviewer',
+    },
+  });
+
   const adminPasswordHash = await bcrypt.hash('Admin2026!Secure', saltRounds);
   const adminUser = await prisma.user.create({
     data: {
@@ -60,7 +68,7 @@ async function main() {
     },
   });
 
-  console.log(`✅ Seeded 2 users: ${reviewerUser.email}, ${adminUser.email}`);
+  console.log(`✅ Seeded 3 users: ${reviewerUser.email}, ${reviewer101.email}, ${adminUser.email}`);
 
   // 3. Create Customers
   console.log('👥 Seeding customers...');
