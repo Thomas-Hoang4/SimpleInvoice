@@ -22,6 +22,7 @@
     "test:cov:backend": "npm run test:cov --prefix backend",
     "test:cov:frontend": "npm run test:cov --prefix frontend",
     "seed": "npm run seed --prefix backend",
+    "prisma:generate": "npm run prisma:generate --prefix backend",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:postgres": "docker compose up -d postgres",

@@ -233,7 +233,7 @@ export class InvoicesService {
       this.prisma.invoice.count({ where }),
     ]);
 
-    const formattedData = invoices.map((inv) => this.formatInvoice(inv));
+    const formattedData = invoices.map((inv: any) => this.formatInvoice(inv));
 
     return {
       data: formattedData,
